@@ -5,7 +5,7 @@
  
   tasks: 
     - name: GET people in space 
-      ansible.builtin.uri: 
+      ansible.builtin.uri:  
         url: http://api.open-notify.org/astros.json 
         method: GET 
         return_content: true 
