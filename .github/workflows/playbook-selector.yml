@@ -1,4 +1,4 @@
-name: Select Playbook 01 or Playbook 02 for execution
+name: Select select playbook.yml or playbook-iss.yml to execute
 
 on:                           # this is the conditional
   push:
@@ -15,5 +15,11 @@ jobs:
       - name: where am i
         run: ls
         
-      - name: Run my Ansible playbook
+      - name: Run my Astros playbook
         run: ansible-playbook playbook.yml -i localhost
+        if: "contains(github.event.head_commit.message, 'astros')"
+
+      - name: Run my ISS playbook
+        run: ansible-playbook playbook-iss.yml -i localhost
+        if: "contains(github.event.head_commit.message, 'iss')"
+        
