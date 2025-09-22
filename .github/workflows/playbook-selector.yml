@@ -16,4 +16,4 @@ jobs:
         run: ls
         
       - name: Run my Ansible playbook
-        run: ansible **/playbook.yml -i localhost
+        run: ansible-playbook playbook.yml -i localhost
