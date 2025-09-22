@@ -1,0 +1,16 @@
+name: Select Playbook 01 or Playbook 02 for execution
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_earth:  # job name
+    runs-on: ubuntu-latest    # runtime
+    steps:
+    - name: Determine what software is present
+      run: python --version
+
+    - name: Determine if ansible is installed
+      run: ansible --version
