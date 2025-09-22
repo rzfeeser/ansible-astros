@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: where am i
+        run: ls
         
       - name: Run my Ansible playbook
-        run: ansible playbook.yml
+        run: ansible **/playbook.yml -i localhost
