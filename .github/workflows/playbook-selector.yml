@@ -1,16 +1,15 @@
 name: Select Playbook 01 or Playbook 02 for execution
 
-on:
+on:                           # this is the conditional
   push:
     branches:
       - main
 
 jobs:
-  hello_earth:  # job name
+  run_playbook:               # job name
     runs-on: ubuntu-latest    # runtime
     steps:
-    - name: Determine what software is present
-      run: python --version
 
-    - name: Determine if ansible is installed
-      run: ansible --version
+    
+    - name: Run my Ansible playbook
+      run: ansible playbook.yml
