@@ -1,0 +1,24 @@
+- name: Fetch current ISS location
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: GET current ISS location
+      ansible.builtin.uri:
+        url: http://api.open-notify.org/iss-now.json
+        method: GET
+        return_content: true
+        status_code: 200
+        timeout: 30
+      register: result
+      retries: 3
+      delay: 2
+      until: result.status == 200
+      changed_when: false
+
+    - name: Save JSON to iss-location.json
+      ansible.builtin.copy:
+        content: "{{ result.content }}"
+        dest: iss-location.json
+        mode: '0644'

@@ -1,25 +1,32 @@
-name: Select select playbook.yml or playbook-iss.yml to execute
 
-on:                           # this is the conditional
-  push:
-    branches:
-      - main
+name: Playbook Selector
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_astros:
+        description: 'Run playbook.yml (Fetch astronauts)'
+        required: false
+        type: boolean
+        default: false
+      run_iss:
+        description: 'Run playbook-iss.yml (Fetch ISS location)'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
-  run_playbook:               # job name
-    runs-on: ubuntu-latest    # runtime
+  run_playbooks:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: where am i
-        run: ls
-        
-      - name: Run my Astros playbook
+      - name: Run Astros playbook
+        if: ${{ github.event.inputs.run_astros == 'true' }}
         run: ansible-playbook playbook.yml -i localhost
-        if: "contains(github.event.head_commit.message, 'astros')"
 
-      - name: Run my ISS playbook
+      - name: Run ISS playbook
+        if: ${{ github.event.inputs.run_iss == 'true' }}
         run: ansible-playbook playbook-iss.yml -i localhost
-        if: "contains(github.event.head_commit.message, 'iss')"
         

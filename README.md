@@ -1,8 +1,12 @@
 # ansible-astros
 
+
 ## Overview
 
-This repository provides an Ansible playbook to fetch the current list of astronauts in space using the [Open Notify API](http://api.open-notify.org/astros.json). The playbook retrieves the data and saves it locally as a JSON file.
+This repository contains Ansible playbooks for space data automation:
+- `playbook.yml` fetches the current list of astronauts in space.
+- `playbook-iss.yml` retrieves the real-time location of the International Space Station (ISS).
+Both use the public Open Notify API and save results as local JSON files for further analysis or sharing.
 
 
 ## Author
@@ -14,6 +18,7 @@ Repository maintained by [rzfeeser](#contact--training).
 - [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) installed on your system
 - Internet access to reach the Open Notify API
 
+
 ## Usage
 
 1. **Clone the repository:**
@@ -22,22 +27,31 @@ Repository maintained by [rzfeeser](#contact--training).
 	cd ansible-astros
 	```
 
-2. **Run the playbook:**
-	```bash
-	ansible-playbook playbook.yml
-	```
+2. **Run a playbook:**
+	- To fetch astronauts:
+	  ```bash
+	  ansible-playbook playbook.yml
+	  ```
+	  Output: `astros.json`
+	- To fetch ISS location:
+	  ```bash
+	  ansible-playbook playbook-iss.yml
+	  ```
+	  Output: `iss-location.json`
 
-3. **Result:**
-	- The playbook will fetch the current astronauts and save the result to `astros.json` in the repository directory.
+3. **View results:**
+	- The output JSON files will be saved in the repository directory.
 
 ## Playbook Details
 
 - **playbook.yml**: Fetches astronaut data from the Open Notify API and saves it as `astros.json`.
 
+
 ## GitHub Actions
 
-- Commits with the word `astros` run `playbook.yml`.
-- Commits with the word `iss` run `playbook-iss.yml` (to be created).
+You can manually trigger the workflow from the GitHub Actions tab using the "Playbook Selector" workflow. When started, you will be prompted to choose which playbook(s) to run:
+- Select to run `playbook.yml` (astronauts), `playbook-iss.yml` (ISS location), or both.
+- After execution, the resulting JSON files are saved as downloadable workflow artifacts.
 
 
 ## License
