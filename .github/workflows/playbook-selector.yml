@@ -9,7 +9,8 @@ jobs:
   run_playbook:               # job name
     runs-on: ubuntu-latest    # runtime
     steps:
-
-    
-    - name: Run my Ansible playbook
-      run: ansible playbook.yml
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Run my Ansible playbook
+        run: ansible playbook.yml
